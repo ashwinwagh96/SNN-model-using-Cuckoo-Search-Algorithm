@@ -12,9 +12,9 @@ function [spikes]=izhikevich(Weights,Time,Features)
     v=vr*ones(1,n); u=0*v; % initial values
     spikes=0;
     gamma = 100;
-    %gamma = 500;
+    %gamma = 200;
     %theta = 100;
-    I=gamma*sum(Features.*Weights);
+    I = gamma*sum(Features.*Weights);
     % forward Euler method
     for i=1:n-1 
         v(i+1)=v(i)+tau*(k*(v(i)-vr)*(v(i)-vt)-u(i)+I)/C;

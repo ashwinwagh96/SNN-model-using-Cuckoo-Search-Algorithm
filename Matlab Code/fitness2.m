@@ -45,7 +45,7 @@ function [fit_array,spikes,classesTR]=fitness2(Weights,Nests,Data,Classes)
     end
         %compute classification performance
         [crTR, classesTR]=performance(Classes,samples,spikes,me);
-        fit1=1-crTR;
+        fit1=crTR;
         %fit1 = crTR;
         fit_array(ind)=fit1;
 end

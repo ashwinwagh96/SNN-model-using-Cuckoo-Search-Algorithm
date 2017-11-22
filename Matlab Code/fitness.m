@@ -9,9 +9,9 @@
 function fit_array=fitness(Weights,Nests,Data,Classes)
     %Computing number of patterns to be classified and number of features of
     %each pattern
-    [samples features]=size(Data);
+    [samples features] = size(Data);
 
-    T=1000; %Simulation time for the spiking neuron
+    T = 1000; %Simulation time for the spiking neuron
 
     %matrix that allocate all the fitness value of each solution
     fit_array=zeros(1,Nests);
@@ -39,7 +39,7 @@ function fit_array=fitness(Weights,Nests,Data,Classes)
     
     %compute classification performance
     [crTR, classesTR]=performance(Classes,samples,spikes,me);
-    fit1=1-crTR;
+    fit1 = crTR;
     %fit1 = crTR;
     fit_array(ind)=fit1;
 end

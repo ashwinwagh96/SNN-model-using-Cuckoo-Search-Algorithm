@@ -1,11 +1,12 @@
 % Program that optimize a spiking neuron model for pattern classification
 % using Cuckoo Search Algorithm and Levy Flight Model
-clear;clc;
+clear all;clc;
+
 
 %%
 %Boundaries of search space
-Lb=-10;
-Ub=10;
+Lb=0;
+Ub=100;
 
 %CS algorithm and Levy Flight parameters
 iter = 1000;    % maximum number of iterations (generations)
@@ -14,7 +15,7 @@ lambda = 1.5;   % power law index
 pa=0.25;        % Discovery rate of alien eggs/solutions
 %pa = 0.15;
 alpha = 1;
-Tolerance = 0.05;
+Tolerance = 1E-12;
  
 % Loading data
 load ('iris1.mat');   % Contains DataTrain, DataTest,features and classes
@@ -25,10 +26,10 @@ dim=features-1;
 [x,iter] = cuckoo_search('fitness',Tolerance,dim,Lb,Ub,Nests,DataTrain1,Classes,iter,lambda,alpha,pa);
 
 %Computing the performance of the methodology
-%[crTR, spikesTR,classesTR]=feval('fitness2',x,1,DataTrain1,Classes);  
-%[crTE, spikesTE, classesTE]=feval('fitness2',x,1,DataTest1,Classes);
-crTR=feval('fitness',x,1,DataTrain1,Classes);
-crTE=feval('fitness',x,1,DataTest1,Classes);
-fprintf(1,'\nPercentage of recognition using training set: %f\n',crTR);
-fprintf(1,'Percentage of recognition using testing set: %f\n',crTE);
+[crTR, spikesTR,classesTR] = feval('fitness2',x,1,DataTrain1,Classes);  
+[crTE, spikesTE, classesTE] = feval('fitness2',x,1,DataTest1,Classes);
+fprintf(1,'\nPercentage of recognition using training set: %f\n',100*crTR);
+fprintf(1,'Percentage of recognition using testing set: %f\n',100*crTE);
+
+
         

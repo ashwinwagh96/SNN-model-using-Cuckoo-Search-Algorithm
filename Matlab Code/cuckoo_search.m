@@ -1,6 +1,6 @@
 function [best_soln,iter] = cuckoo_search(fitness_eval,Tolerance,dim,lb,ub,Nests,Data,Classes,Itermax,lambda,alpha,pa)
 
-    weights=lb+(ub-lb).*rand(Nests,dim); %40x4
+    weights = lb + (ub - lb).*rand(Nests,dim); %40x4
     % Fitness function of all the nests
     fitness = feval(fitness_eval,weights,Nests,Data,Classes);
     
@@ -8,12 +8,13 @@ function [best_soln,iter] = cuckoo_search(fitness_eval,Tolerance,dim,lb,ub,Nests
     minfit = 0;
     iter = 0;
     %alpha = 1; 
-    while (iter < Itermax) & (minfit == 0)  
+    while (iter < Itermax) && (minfit == 0)  
         iter = iter +1;
         cuckoo = cuckoo + alpha.*levy(1,dim,lambda); % Levy flight
         cuckoo_fitness = feval(fitness_eval,cuckoo,1,Data,Classes);
         j = randi([1 Nests]);   % Selecting random nest
-        if cuckoo_fitness < fitness(j)
+        
+        if cuckoo_fitness > fitness(j)
            weights(j,:) = cuckoo;
            fitness(j) = cuckoo_fitness;
         end

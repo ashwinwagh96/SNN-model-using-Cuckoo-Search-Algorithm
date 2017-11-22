@@ -8,7 +8,7 @@
 %            crTR     : classification performance
 %            classesTR: The class to which each pattern was classified
 
-function [crTR, classesTR]=performance(Classes,samplesTR,spikesTR,rate)
+function [crTR, classesTR] = performance(Classes,samplesTR,spikesTR,rate)
 
     countTR=0;
     classesTR=cell(1,Classes);
@@ -17,7 +17,7 @@ function [crTR, classesTR]=performance(Classes,samplesTR,spikesTR,rate)
         [ns c]=size(spikesTR{j});
         crTR=zeros(ns,1);
         for k=1:ns
-            [m, crTR(k)]=min(abs(rate-spikesTR{j}(k)));
+            [m crTR(k)]=min(abs(rate-spikesTR{j}(k)));
         end
         classesTR{j}=crTR;
         crTR=find(crTR==j);
