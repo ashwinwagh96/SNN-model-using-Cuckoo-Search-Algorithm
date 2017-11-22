@@ -15,7 +15,7 @@ lambda = 1.5;   % power law index
 pa=0.25;        % Discovery rate of alien eggs/solutions
 %pa = 0.15;
 alpha = 1;
-Tolerance = 1E-12;
+Tolerance = 0.95;
  
 % Loading data
 load ('iris1.mat');   % Contains DataTrain, DataTest,features and classes
@@ -23,11 +23,13 @@ load ('iris1.mat');   % Contains DataTrain, DataTest,features and classes
 dim=features-1;      
 
 % Training the spiking neuron using CS
-[x,iter] = cuckoo_search('fitness',Tolerance,dim,Lb,Ub,Nests,DataTrain1,Classes,iter,lambda,alpha,pa);
+[x,iter,fitness_array,weights] = cuckoo_search('fitness',Tolerance,dim,Lb,Ub,Nests,DataTrain1,Classes,iter,lambda,alpha,pa);
 
 %Computing the performance of the methodology
-[crTR, spikesTR,classesTR] = feval('fitness2',x,1,DataTrain1,Classes);  
-[crTE, spikesTE, classesTE] = feval('fitness2',x,1,DataTest1,Classes);
+% [crTR, spikesTR,classesTR] = feval('fitness2',x,1,DataTrain1,Classes);  
+% [crTE, spikesTE, classesTE] = feval('fitness2',x,1,DataTest1,Classes);
+crTR = feval('fitness',x,1,DataTrain1,Classes);
+crTE = feval('fitness',x,1,DataTest1,Classes);
 fprintf(1,'\nPercentage of recognition using training set: %f\n',100*crTR);
 fprintf(1,'Percentage of recognition using testing set: %f\n',100*crTE);
 
