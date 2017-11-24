@@ -13,4 +13,4 @@ Total1 = zeros(size(Total));
  DataTrain1 = Total(31:150,:);
  features = 5;
  Classes = 3;
- save('iris1.mat','DataTest1','DataTrain1','features','Classes');
+ save('iris1.mat','DataTest','DataTrain','features','Classes');

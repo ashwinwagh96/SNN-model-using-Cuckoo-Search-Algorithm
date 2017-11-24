@@ -14,15 +14,15 @@ function [crTR, classesTR] = performance(Classes,samplesTR,spikesTR,rate)
     classesTR=cell(1,Classes);
 
     for j=1:Classes
-        [ns c]=size(spikesTR{j});
+        [ns , ~]=size(spikesTR{j});
         crTR=zeros(ns,1);
         for k=1:ns
-            [m crTR(k)]=min(abs(rate-spikesTR{j}(k)));
+            [~, crTR(k)]=min(abs(rate-spikesTR{j}(k)));
         end
         classesTR{j}=crTR;
         crTR=find(crTR==j);
 
-        [crTR c]=size(crTR);
+        [crTR, ~]=size(crTR);
         countTR=countTR+crTR;
     end
 

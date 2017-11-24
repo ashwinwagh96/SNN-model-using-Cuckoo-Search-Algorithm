@@ -6,11 +6,11 @@
 %            Classes: Number of classes
 %
 % Return values:
-%                Apts     : fitness value of each solution
-%                spikes   : firing rate generated with each pattern
-%                classesTR: the class to which each pattern was classified
+%            Apts     : fitness value of each solution
+%            spikes   : firing rate generated with each pattern
+%            classesTR: the class to which each pattern was classified
 
-function [fit_array,spikes,classesTR]=fitness2(Weights,Nests,Data,Classes)
+function [fit_array,spikes,classesTR]=fitness(Weights,Nests,Data,Classes)
 %Computing number of patterns to be classified and number of features of
 %each pattern
     [samples, ~]=size(Data);
